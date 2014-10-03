@@ -9,9 +9,10 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -53,11 +54,13 @@ public class ParseTask extends AsyncTask<String, Float, List<CVEEntry>> {
 
             for(int i = 0; i < uris.length; i++) {
                 File file = activity.getFileStreamPath(uris[i]);
-                InputStream in = activity.openFileInput(uris[i]);
+                ZipInputStream zin = new ZipInputStream(activity.openFileInput(uris[i]));
+                ZipEntry entry = zin.getNextEntry();
                 CVEParser cveParser = new CVEParser(file.lastModified());
-                parser.parse(in, cveParser);
+                parser.parse(zin, cveParser);
                 List<CVEEntry> temp = cveParser.getEntries();
                 result.addAll(cveParser.getEntries());
+                zin.close();
             }
             return result;
         } catch(ParserConfigurationException configEx) {
