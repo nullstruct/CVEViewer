@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
+        android:id="@+id/item_cve"
+        android:text="CVE"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:layout_gravity="top"
+    />
+    <TextView
+        android:id="@+id/item_url"
+        android:text="URL"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textSize="13sp"
+        android:layout_gravity="bottom"
+    />
+</GridLayout>

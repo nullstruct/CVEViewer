@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+        >
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cve_id"
+                android:text="CVE-2014-0000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/modified_date"
+                android:text="Modified: 2014"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/published_date"
+                android:text="Published: 2014"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cvs_score"
+                android:text="CVS Score: 10.0"
+                android:textSize="13sp"
+                />
+
+            <View android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="?android:attr/listDivider"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/description"
+                android:text="There shall be pwnage"
+                />
+
+            <View android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="?android:attr/listDivider"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/access_complexity"
+                android:text="Access Complexity: EASY"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/authentication"
+                android:text="Authentication: NONE"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/access_vector"
+                android:text="Access Vector: NETWORK"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/confidentiality_impact"
+                android:text="Confidentiality Impact: NONE"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/integrity_impact"
+                android:text="Integrity Impact: NONE"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/availability_impact"
+                android:text="Availability Impact: NONE"
+                android:textSize="13sp"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SampleActivity"
+        tools:ignore="MergeRootFrame" >
+
+        <fragment android:name="com.testapp.ajtgarber.testapplication.CVEViewerActivity$PlaceholderFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/adFragment" />
+
+        <fragment
+            android:id="@+id/adFragment"
+            android:name="com.testapp.ajtgarber.testapplication.CVEViewerActivity$AdFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>
