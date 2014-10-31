@@ -42,9 +42,9 @@ public class DownloadTask extends AsyncTask<Uri, Float, List<String>> {
     @Override
     protected List<String> doInBackground(Uri... uris) {
         List<String> result = new LinkedList<String>();
-        for(int i = 0; i < uris.length; i++) {
+        for(Uri uri : uris) {
             try {
-                URL url = new URL(uris[i].toString());
+                URL url = new URL(uri.toString());
                 URLConnection con = url.openConnection();
 
                 String filename = getFileName(url.getFile());
@@ -69,13 +69,11 @@ public class DownloadTask extends AsyncTask<Uri, Float, List<String>> {
                 }
                 fos.close();
                 is.close();
-                result.add(uris[i].toString());
+                result.add(uri.toString());
 
                 if(isCancelled()) {
-                    try {
-                        file.delete(); //The download may not have completed properly
-                    } catch(Exception ex) {
-                        Log.e(tag, ex.getMessage());
+                    if(!file.delete()) {
+                        Log.e(tag, "Unable to delete file"); //The download may no have completed properly
                     }
                 }
             } catch(IOException ex) {

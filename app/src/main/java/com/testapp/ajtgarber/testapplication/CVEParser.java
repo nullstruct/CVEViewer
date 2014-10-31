@@ -3,22 +3,17 @@ package com.testapp.ajtgarber.testapplication;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by ajtgarber on 9/28/14.
- */
 public class CVEParser extends DefaultHandler {
     public static String tag = "CVEParser";
 
     private List<CVEEntry> entries;
     private boolean parsingEntry;
     private String id;
-    private String link;
     private String summary;
     private String published;
     private String lastModified;
@@ -34,7 +29,6 @@ public class CVEParser extends DefaultHandler {
     private List<String> vulnerableProducts;
 
     private StringBuffer buffer;
-    private DateFormat dateFormat;
     private long fileLastModified;
 
     public CVEParser(long fileLastModified) {
@@ -43,7 +37,6 @@ public class CVEParser extends DefaultHandler {
         vulnerableProducts = new LinkedList<String>();
         parsingEntry = false;
         buffer = new StringBuffer();
-        dateFormat = DateFormat.getDateInstance();
     }
 
     public List<CVEEntry> getEntries() {
@@ -64,7 +57,7 @@ public class CVEParser extends DefaultHandler {
             //Log.i(tag, "ENTRY ENDED");
             parsingEntry = false;
             if(id != null) {
-                CVEEntry entry = new CVEEntry(id, link, cvsScore);
+                CVEEntry entry = new CVEEntry(id, "", cvsScore);
                 entry.setDescription(summary);
                 entry.setPublishedDate(published);
                 entry.setLastModified(lastModified);
@@ -74,7 +67,6 @@ public class CVEParser extends DefaultHandler {
                 entry.setAvailabilityImpact(availabilityImpact);
                 entry.setConfidentialityImpact(confidentialityImpact);
                 entry.setAuthentication(authentication);
-                entry.setVulnerableSoftware(vulnerableProducts);
                 entry.setShouldNotify(shouldNotify);
                 entries.add(entry);
                 id = null;

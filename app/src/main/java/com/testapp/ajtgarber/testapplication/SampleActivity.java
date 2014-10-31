@@ -35,8 +35,6 @@ public class SampleActivity extends Activity implements AdapterView.OnItemClickL
     private CVEFragment dataFragment;
     public static String recentFeed = "https://nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Recent.xml";
     public static String recentFile = "nvdcve-2.0-Recent.xml";
-    public static String thisYear = "http://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-2014.xml";
-    public static String yearFile = "nvdcve-2.0-2014.xml";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,14 +167,13 @@ public class SampleActivity extends Activity implements AdapterView.OnItemClickL
         TextView tv = (TextView)gl.getChildAt(0);
         String title = tv.getText().toString();
 
-        for(int i = 0; i < entries.size(); i++) {
-            CVEEntry entry = entries.get(i);
+        for(CVEEntry entry : entries) {
             if(entry.getId().equals(title.substring(0, 13))) {
                 Intent intent = new Intent(getApplicationContext(), CVEViewerActivity.class);
                 intent.putExtra("cve_id", entry.getId());
                 intent.putExtra("description", entry.getDescription());
                 intent.putExtra("published_date", entry.getPublishedDate());
-                intent.putExtra("modified_date", entry.getModifiedDate());
+                intent.putExtra("modified_date", entry.getLastModified());
                 intent.putExtra("access_vector", entry.getAccessVector());
                 intent.putExtra("access_complexity", entry.getAccessComplexity());
                 intent.putExtra("integrity_impact", entry.getIntegrityImpact());
@@ -199,8 +196,7 @@ public class SampleActivity extends Activity implements AdapterView.OnItemClickL
         listView.setOnItemClickListener(this);
 
         ArrayList<Map<String, String>> contents = new ArrayList<Map<String, String>>();
-        for(int i = 0; i < entries.size(); i++) {
-            CVEEntry entry = entries.get(i);
+        for(CVEEntry entry : entries) {
             Map<String, String> temp = new Hashtable<String, String>();
             temp.put("CVE", entry.getId()+" ("+entry.getCvsScore()+")");
             temp.put("URL", entry.getDescription());

@@ -5,9 +5,6 @@ import android.os.Bundle;
 
 import java.util.List;
 
-/**
- * Created by ajtgarber on 9/30/14.
- */
 public class CVEFragment extends Fragment {
     private List<CVEEntry> entries;
 

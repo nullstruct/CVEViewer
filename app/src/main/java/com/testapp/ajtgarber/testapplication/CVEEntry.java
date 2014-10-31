@@ -6,12 +6,9 @@ import java.util.List;
 
 /**
  * Describes an entry provided by NIST's NVD RSS feed
- * Created by ajtgarber on 9/28/14.
  */
 public class CVEEntry {
     private String id;
-    private List<String> vulnerableSoftware;
-    private Uri link;
     private String description;
     private String publishedDate;
     private String lastModified;
@@ -44,22 +41,6 @@ public class CVEEntry {
         this.id = id;
     }
 
-    public List<String> getVulnerableSoftware() {
-        return vulnerableSoftware;
-    }
-
-    public void setVulnerableSoftware(List<String> vulnerableSoftware) {
-        this.vulnerableSoftware = vulnerableSoftware;
-    }
-
-    public Uri getLink() {
-        return link;
-    }
-
-    public void setLink(Uri link) {
-        this.link = link;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -88,6 +69,7 @@ public class CVEEntry {
         return cvsScore;
     }
 
+    @SuppressWarnings("unused")
     public void setCvsScore(double cvsScore) {
         this.cvsScore = cvsScore;
     }
@@ -148,6 +130,7 @@ public class CVEEntry {
         this.resources = resources;
     }
 
+    @SuppressWarnings("unused")
     public boolean isShouldNotify() {
         return shouldNotify;
     }

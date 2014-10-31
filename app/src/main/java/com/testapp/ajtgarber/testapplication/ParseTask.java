@@ -19,10 +19,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Parses RSS Feed from NIST's NVD and places information into a ListView
- * Created by ajtgarber on 9/28/14.
  */
 public class ParseTask extends AsyncTask<String, Float, List<CVEEntry>> {
-    public static final String schemaUrl = "https://nvd.nist.gov/schema/nvd-cve-feed_2.0.xsd";
     public static final String tag = "ParseTask";
 
     private ParseCallbackHandler handler;
@@ -51,15 +49,13 @@ public class ParseTask extends AsyncTask<String, Float, List<CVEEntry>> {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser parser = factory.newSAXParser();
 
-            for(int i = 0; i < uris.length; i++) {
-                File file = activity.getFileStreamPath(uris[i]);
-                InputStream in = activity.openFileInput(uris[i]);
+            for(String uri : uris) {
+                File file = activity.getFileStreamPath(uri);
+                InputStream in = activity.openFileInput(uri);
                 CVEParser cveParser = new CVEParser(file.lastModified());
                 parser.parse(in, cveParser);
-                List<CVEEntry> temp = cveParser.getEntries();
                 result.addAll(cveParser.getEntries());
             }
-            return result;
         } catch(ParserConfigurationException configEx) {
             Log.e(tag, configEx.toString());
             result = null;
