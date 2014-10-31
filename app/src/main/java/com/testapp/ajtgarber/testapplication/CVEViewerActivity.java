@@ -57,15 +57,6 @@ public class CVEViewerActivity extends Activity {
         setFieldText(R.id.confidentiality_impact, "Confidentiality Impact: "+bundle.getString("confidentiality_impact"));
         setFieldText(R.id.authentication, "Authentication: "+bundle.getString("authentication"));
         setFieldText(R.id.cvs_score, "CVS Score: "+bundle.getDouble("cvs_score"));
-        /*String[] vulnerableProducts = bundle.getStringArray("vulnerable_products");
-        String vulnerable = "Affected Software: ";
-        for(int i = 0; i < vulnerableProducts.length; i++) {
-            if(i > 0) {
-                vulnerable += ", ";
-            }
-            vulnerable += vulnerableProducts[i];
-        }
-        setFieldText(R.id.vulnerable_software, vulnerable);*/
     }
 
     @Override

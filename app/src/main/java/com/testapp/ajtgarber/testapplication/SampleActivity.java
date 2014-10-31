@@ -176,7 +176,7 @@ public class SampleActivity extends Activity implements AdapterView.OnItemClickL
                 intent.putExtra("cve_id", entry.getId());
                 intent.putExtra("description", entry.getDescription());
                 intent.putExtra("published_date", entry.getPublishedDate());
-                intent.putExtra("modified_date", entry.getLastModified());
+                intent.putExtra("modified_date", entry.getModifiedDate());
                 intent.putExtra("access_vector", entry.getAccessVector());
                 intent.putExtra("access_complexity", entry.getAccessComplexity());
                 intent.putExtra("integrity_impact", entry.getIntegrityImpact());
@@ -184,12 +184,6 @@ public class SampleActivity extends Activity implements AdapterView.OnItemClickL
                 intent.putExtra("confidentiality_impact", entry.getConfidentialityImpact());
                 intent.putExtra("authentication", entry.getAuthentication());
                 intent.putExtra("cvs_score", entry.getCvsScore());
-
-                String[] vulnerableProducts = new String[entry.getVulnerableSoftware().size()];
-                for(int j = 0; j < vulnerableProducts.length; j++) {
-                    vulnerableProducts[j] = entry.getVulnerableSoftware().get(j);
-                }
-                intent.putExtra("vulnerable_products", vulnerableProducts);
                 startActivity(intent);
             }
         }
