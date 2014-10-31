@@ -59,7 +59,7 @@ public class DownloadTask extends AsyncTask<Uri, Float, List<String>> {
 
                 InputStream is = con.getInputStream();
                 FileOutputStream fos = activity.openFileOutput(filename, Context.MODE_PRIVATE);
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[512];
                 int n;
                 while((n = is.read(buffer)) > 0) {
                     fos.write(buffer, 0, n);

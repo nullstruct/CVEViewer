@@ -33,8 +33,8 @@ public class SampleActivity extends Activity implements AdapterView.OnItemClickL
     private List<CVEEntry> entries;
     private SimpleAdapter adapter;
     private CVEFragment dataFragment;
-    public static String recentFeed = "https://nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Recent.xml.zip";
-    public static String recentFile = "nvdcve-2.0-Recent.xml.zip";
+    public static String recentFeed = "https://nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-Recent.xml";
+    public static String recentFile = "nvdcve-2.0-Recent.xml";
     public static String thisYear = "http://static.nvd.nist.gov/feeds/xml/cve/nvdcve-2.0-2014.xml";
     public static String yearFile = "nvdcve-2.0-2014.xml";
 
