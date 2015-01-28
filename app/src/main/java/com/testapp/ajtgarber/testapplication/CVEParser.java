@@ -1,5 +1,7 @@
 package com.testapp.ajtgarber.testapplication;
 
+import android.util.Log;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -92,8 +94,12 @@ public class CVEParser extends DefaultHandler {
 
             Calendar lastChecked = Calendar.getInstance();
             lastChecked.setTime(new Date(fileLastModified));
+            String friendlyLastChecked = lastChecked.get(Calendar.DAY_OF_MONTH)+"/"+lastChecked.get(Calendar.MONTH)+"/"+lastChecked.get(Calendar.YEAR);
+            String friendlyPublished = publishedDate.get(Calendar.DAY_OF_MONTH)+"/"+publishedDate.get(Calendar.MONTH)+"/"+publishedDate.get(Calendar.YEAR);
+            Log.i("CVEParser", "lastChecked = "+friendlyLastChecked+", publishedDate = "+friendlyPublished);
 
-            if(publishedDate.compareTo(lastChecked) > 0) {
+            if(publishedDate.compareTo(lastChecked) >= 0) {
+                Log.i("CVEParser", "We should notify");
                 shouldNotify = true;
             }
 
@@ -109,8 +115,12 @@ public class CVEParser extends DefaultHandler {
 
             Calendar lastChecked = Calendar.getInstance();
             lastChecked.setTime(new Date(fileLastModified));
+            String friendlyLastChecked = lastChecked.get(Calendar.DAY_OF_MONTH)+"/"+lastChecked.get(Calendar.MONTH)+"/"+lastChecked.get(Calendar.YEAR);
+            String friendlyPublished = publishedDate.get(Calendar.DAY_OF_MONTH)+"/"+publishedDate.get(Calendar.MONTH)+"/"+publishedDate.get(Calendar.YEAR);
+            Log.i("CVEParser", "lastChecked = "+friendlyLastChecked+", publishedDate = "+friendlyPublished);
 
-            if(publishedDate.compareTo(lastChecked) > 0) {
+            if(publishedDate.compareTo(lastChecked) >= 0) {
+                Log.i("CVEParser", "We should notify");
                 shouldNotify = true;
             }
             //Log.i(tag, "vuln:last-modified-datetime: "+lastModified);

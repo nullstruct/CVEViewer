@@ -24,6 +24,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -191,6 +192,13 @@ public class SampleActivity extends Activity implements AdapterView.OnItemClickL
             Log.e("SampleActivity", "addEntriesToList: entries == null");
             return;
         }
+        Collections.sort(entries);
+        for(int i = 0; i < entries.size()/2; i++) {
+            CVEEntry e1 = entries.get(i);
+            CVEEntry e2 = entries.get(entries.size()-1-i);
+            entries.set(i, e2);
+            entries.set(entries.size()-1-i, e1);
+        }
 
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
@@ -198,9 +206,15 @@ public class SampleActivity extends Activity implements AdapterView.OnItemClickL
         ArrayList<Map<String, String>> contents = new ArrayList<Map<String, String>>();
         for(CVEEntry entry : entries) {
             Map<String, String> temp = new Hashtable<String, String>();
-            temp.put("CVE", entry.getId()+" ("+entry.getCvsScore()+")");
+            String cveTitle = entry.getId()+" ("+entry.getCvsScore()+")";
+            if(entry.isShouldNotify())
+                cveTitle += "*";
+            temp.put("CVE", cveTitle);
             temp.put("URL", entry.getDescription());
-            contents.add(temp);
+            if(entry.isShouldNotify())
+                contents.add(0, temp);
+            else
+                contents.add(temp);
         }
         String[] from = {"CVE", "URL"};
         int[] to = {R.id.item_cve, R.id.item_url};

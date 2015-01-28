@@ -2,15 +2,17 @@ package com.testapp.ajtgarber.testapplication;
 
 import android.net.Uri;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Describes an entry provided by NIST's NVD RSS feed
  */
-public class CVEEntry {
+public class CVEEntry implements Comparable<Comparable> {
     private String id;
     private String description;
     private String publishedDate;
+    private Calendar published;
     private String lastModified;
 
     private double cvsScore;
@@ -55,6 +57,10 @@ public class CVEEntry {
 
     public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
+        String[] parts = publishedDate.split("-");
+        int[] intParts = {Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2])};
+        published = Calendar.getInstance();
+        published.set(intParts[0], intParts[1] - 1, intParts[2]);
     }
 
     public String getLastModified() {
@@ -137,5 +143,17 @@ public class CVEEntry {
 
     public void setShouldNotify(boolean shouldNotify) {
         this.shouldNotify = shouldNotify;
+    }
+
+    public int compareTo(Comparable other) {
+        if(other instanceof CVEEntry) {
+            CVEEntry otherEntry = (CVEEntry)other;
+            return published.compareTo(otherEntry.published);
+        }
+        int code = hashCode();
+        int code2 = other.hashCode();
+        if(code == code2) return 0;
+        if(code < code2) return -1;
+        return 1;
     }
 }
